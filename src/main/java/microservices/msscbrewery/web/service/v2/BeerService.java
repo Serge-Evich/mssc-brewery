@@ -1,6 +1,7 @@
-package microservices.msscbrewery.web.service;
+package microservices.msscbrewery.web.service.v2;
 
-import microservices.msscbrewery.web.model.BeerDto;
+
+import microservices.msscbrewery.web.model.v2.BeerDto;
 
 import java.util.UUID;
 

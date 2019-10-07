@@ -1,4 +1,4 @@
-package microservices.msscbrewery.web.model;
+package microservices.msscbrewery.web.model.v2;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,6 +14,6 @@ import java.util.UUID;
 public class BeerDto {
     private UUID id;
     private String name;
-    private String style;
+    private BeerStyle style;
     private Long upc;
 }

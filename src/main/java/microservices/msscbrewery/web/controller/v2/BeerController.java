@@ -1,7 +1,7 @@
-package microservices.msscbrewery.web.controller;
+package microservices.msscbrewery.web.controller.v2;
 
-import microservices.msscbrewery.web.model.BeerDto;
-import microservices.msscbrewery.web.service.BeerService;
+import microservices.msscbrewery.web.model.v2.BeerDto;
+import microservices.msscbrewery.web.service.v2.BeerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -19,15 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.URI;
 import java.util.UUID;
 
-@Deprecated
-@RequestMapping("/api/v1/beer")
+@RequestMapping("/api/v2/beer")
 @RestController
 public class BeerController {
 
     private final BeerService beerService;
 
     @Autowired
-    public BeerController(@Qualifier("defaultBeerService") BeerService beerService) {
+    public BeerController(@Qualifier("defaultBeerServiceV2") BeerService beerService) {
         this.beerService = beerService;
     }
 
