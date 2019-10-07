@@ -1,10 +1,12 @@
 package microservices.msscbrewery.web.service;
 
+import lombok.extern.slf4j.Slf4j;
 import microservices.msscbrewery.web.model.BeerDto;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Slf4j
 @Service
 public class DefaultBeerService implements BeerService {
     @Override

@@ -4,11 +4,11 @@ import microservices.msscbrewery.web.model.BeerDto;
 import microservices.msscbrewery.web.service.BeerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,10 +32,8 @@ public class BeerController {
     }
 
     @PostMapping("/beer")
-    public ResponseEntity postBeer(BeerDto beerDto) {
+    public ResponseEntity postBeer(@RequestBody BeerDto beerDto) {
         BeerDto result = beerService.save(beerDto);
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Location", result.getId().toString());
-        return ResponseEntity.created(URI.create("/api/customer/" + result.getId().toString())).body(httpHeaders);
+        return ResponseEntity.created(URI.create("/api/customer/" + result.getId().toString())).build();
     }
 }
