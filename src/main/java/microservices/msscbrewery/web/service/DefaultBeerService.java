@@ -25,4 +25,14 @@ public class DefaultBeerService implements BeerService {
                 .upc(beerDto.getUpc())
                 .build();
     }
+
+    @Override
+    public void update(UUID beerId, BeerDto beerDto) {
+
+    }
+
+    @Override
+    public void delete(UUID beerId) {
+
+    }
 }
