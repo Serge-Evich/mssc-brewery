@@ -4,16 +4,17 @@ import microservices.msscbrewery.web.model.BeerDto;
 import microservices.msscbrewery.web.service.BeerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.UUID;
 
-@RequestMapping("/api/v1/beer")
+@RequestMapping(BeerController.PATH)
 @RestController
 public class BeerController {
+
+    public static final String PATH = "/api/v1/beer";
 
     private final BeerService beerService;
 
@@ -24,15 +25,13 @@ public class BeerController {
 
     @GetMapping("/{beerId}")
     public ResponseEntity<BeerDto> get(@PathVariable("beerId") UUID beerId) {
-        return ResponseEntity.ok(beerService.getBeerById(beerId));
+        return ResponseEntity.ok(beerService.get(beerId));
     }
 
     @PostMapping
     public ResponseEntity<?> post(@RequestBody BeerDto beerDto) {
         BeerDto result = beerService.save(beerDto);
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Location", result.getId().toString());
-        return ResponseEntity.created(URI.create("/api/v1/beer/" + result.getId().toString())).body(httpHeaders);
+        return ResponseEntity.created(URI.create(PATH + "/" + result.getId())).build();
     }
 
     @PutMapping("/{beerId}")

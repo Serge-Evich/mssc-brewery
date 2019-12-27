@@ -8,7 +8,7 @@ import java.util.UUID;
 @Service
 public class DefaultBeerService implements BeerService {
     @Override
-    public BeerDto getBeerById(UUID beerId) {
+    public BeerDto get(UUID beerId) {
         return BeerDto.builder()
                 .id(beerId)
                 .name("beerName")

@@ -11,4 +11,22 @@ public class DefaultCustomerService implements CustomerService {
     public CustomerDto getById(UUID customerId) {
         return CustomerDto.builder().id(customerId).name("customerName").build();
     }
+
+    @Override
+    public CustomerDto save(CustomerDto customerDto) {
+        return CustomerDto.builder()
+                .id(UUID.randomUUID())
+                .name(customerDto.getName())
+                .build();
+    }
+
+    @Override
+    public void update(UUID customerId, CustomerDto customerDto) {
+
+    }
+
+    @Override
+    public void delete(UUID customerId) {
+
+    }
 }
