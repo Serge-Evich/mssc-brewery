@@ -3,10 +3,10 @@ package microservices.msscbrewery.web.controller;
 import microservices.msscbrewery.web.model.BeerDto;
 import microservices.msscbrewery.web.service.BeerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.UUID;
 
@@ -19,7 +19,7 @@ public class BeerController {
     private final BeerService beerService;
 
     @Autowired
-    public BeerController(@Qualifier("defaultBeerService") BeerService beerService) {
+    public BeerController(BeerService beerService) {
         this.beerService = beerService;
     }
 
@@ -29,13 +29,13 @@ public class BeerController {
     }
 
     @PostMapping
-    public ResponseEntity<?> post(@RequestBody BeerDto beerDto) {
+    public ResponseEntity<?> post(@Valid @RequestBody BeerDto beerDto) {
         BeerDto result = beerService.save(beerDto);
         return ResponseEntity.created(URI.create(PATH + "/" + result.getId())).build();
     }
 
     @PutMapping("/{beerId}")
-    public ResponseEntity<?> put(@PathVariable("beerId") UUID beerId, @RequestBody BeerDto beerDto) {
+    public ResponseEntity<?> put(@PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDto beerDto) {
         beerService.update(beerId, beerDto);
         return ResponseEntity.noContent().build();
     }
